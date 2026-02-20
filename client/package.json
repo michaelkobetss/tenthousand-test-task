@@ -1,0 +1,7 @@
+{
+  "name": "client",
+  "private": true,
+  "dependencies": {
+    "@shared/types": "workspace:*"
+  }
+}
