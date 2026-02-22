@@ -8,7 +8,8 @@ export const api = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: "http://localhost:4000/graphql",
         headers: { "Content-Type": "application/json" }
-    }),
+    }),  tagTypes: ["Form"],
+
     endpoints: () => ({})
 });
 
