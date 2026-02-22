@@ -1,4 +1,4 @@
-import { useGetFormsQuery } from "./features/forms/formsApi";
+import { useGetFormsQuery } from "./features/api/api";
 
 function App() {
     const { data, isLoading, error } = useGetFormsQuery();
@@ -9,14 +9,7 @@ function App() {
     return (
         <div>
             <h1>Forms</h1>
-            <ul>
-                {data?.map((form) => (
-                    <li key={form.id}>
-                        <strong>{form.title}</strong>
-                        <div>{form.description}</div>
-                    </li>
-                ))}
-            </ul>
+            <pre>{JSON.stringify(data, null, 2)}</pre>
         </div>
     );
 }
