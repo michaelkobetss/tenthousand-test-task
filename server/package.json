@@ -2,6 +2,21 @@
   "name": "server",
   "private": true,
   "dependencies": {
-    "@shared/types": "workspace:*"
+    "@apollo/server": "^5.4.0",
+    "@as-integrations/express5": "^1.1.2",
+    "@nestjs/apollo": "^13.2.4",
+    "@nestjs/common": "^11.1.14",
+    "@nestjs/core": "^11.1.14",
+    "@nestjs/graphql": "^13.2.4",
+    "@nestjs/platform-express": "^11.1.14",
+    "@shared/types": "workspace:*",
+    "graphql": "^16.12.0"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.16",
+    "ts-node": "^10.9.2"
+  },
+  "scripts": {
+    "dev": "ts-node src/main.ts"
   }
 }

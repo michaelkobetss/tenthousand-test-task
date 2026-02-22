@@ -1,0 +1,45 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Question {
+  id: String!
+  title: String!
+  type: QuestionType!
+  options: [String!]
+}
+
+enum QuestionType {
+  TEXT
+  MULTIPLE_CHOICE
+  CHECKBOX
+  DATE
+}
+
+type Form {
+  id: String!
+  title: String!
+  description: String
+  questions: [Question!]!
+}
+
+type Query {
+  forms: [Form!]!
+  form(id: String!): Form
+}
+
+type Mutation {
+  createForm(input: CreateFormInput!): Form!
+}
+
+input CreateFormInput {
+  title: String!
+  description: String
+  questions: [QuestionInput!]!
+}
+
+input QuestionInput {
+  title: String!
+  type: QuestionType!
+  options: [String!]
+}
