@@ -5,7 +5,6 @@ import { api } from "../api/api";
 export interface Form {
     id: string;
     title: string;
-    description?: string;
 }
 
 interface GetFormsResponse {

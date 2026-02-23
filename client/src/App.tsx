@@ -1,30 +1,7 @@
-import { useGetFormsQuery, useCreateFormMutation } from "./features/forms/formsApi";
+// src/App.tsx
+import { RouterProvider } from "react-router-dom";
+import { router } from "./app/router";
 
-function App() {
-    const { data, isLoading } = useGetFormsQuery();
-    const [createForm, { isLoading: creating }] = useCreateFormMutation();
-
-    if (isLoading) return <div>Loading...</div>;
-
-    return (
-        <div>
-            <h1>Forms</h1>
-
-            <button
-                disabled={creating}
-                onClick={async () => {
-                    await createForm({
-                        title: "Test form",
-                        description: "Created from UI"
-                    });
-                }}
-            >
-                Create Form
-            </button>
-
-            <pre>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-    );
+export default function App() {
+    return <RouterProvider router={router} />;
 }
-
-export default App;
