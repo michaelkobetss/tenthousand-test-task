@@ -1,0 +1,97 @@
+.page {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.title {
+    margin: 0;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.primaryButton {
+    display: inline-block;
+    padding: 10px 12px;
+    background: #000;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    border: none;
+}
+
+.secondaryButton {
+    padding: 10px 12px;
+    background: #f4f4f5;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.info {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.error {
+    color: #dc2626;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+@media (max-width: 700px) {
+    .list {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    padding: 12px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cardTitle {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.cardDescription {
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.cardDescriptionMuted {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.cardLinks {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.link {
+    text-decoration: none;
+    color: #2563eb;
+}
