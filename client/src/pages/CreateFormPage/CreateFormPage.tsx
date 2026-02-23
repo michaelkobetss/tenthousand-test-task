@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 import { nanoid } from "@reduxjs/toolkit";
-import { useCreateFormMutation } from "../../features/forms/formsApi";
+import { useCreateFormMutation } from "../../shared/graphql/generated";
 import { QuestionType } from "../../../../shared/types/form";
-import type { QuestionDraft, CreateFormInput } from "../../../../shared/types/form";
+import type { QuestionDraft } from "../../../../shared/types/form";
 import styles from "./CreateFormPage.module.css";
 
 export function CreateFormPage() {
@@ -37,9 +37,8 @@ export function CreateFormPage() {
 
     const canSubmit = useMemo(() => {
         if (!title.trim()) return false;
-        // простая валидация: если есть вопросы — у них должен быть title
         if (questions.some((q) => !q.title.trim())) return false;
-        // если тип с опциями — хотя бы 1 непустая опция
+
         if (
             questions.some(
                 (q) =>
@@ -58,20 +57,20 @@ export function CreateFormPage() {
             return;
         }
 
-        const input: CreateFormInput = {
-            title: title.trim(),
-            description: description.trim() ? description.trim() : undefined,
-            questions: questions.map((q) => ({
-                title: q.title.trim(),
-                type: q.type,
-                options:
-                    q.type === QuestionType.TEXT || q.type === QuestionType.DATE
-                        ? undefined
-                        : (q.options ?? []).map((o) => o.trim()).filter(Boolean),
-            })),
-        };
-
-        await createForm(input).unwrap();
+        await createForm({
+            input: {
+                title: title.trim(),
+                description: description.trim() ? description.trim() : undefined,
+                questions: questions.map((q) => ({
+                    title: q.title.trim(),
+                    type: q.type as any,
+                    options:
+                        q.type === QuestionType.TEXT || q.type === QuestionType.DATE
+                            ? undefined
+                            : (q.options ?? []).map((o) => o.trim()).filter(Boolean),
+                })),
+            },
+        }).unwrap();
 
         alert("Form created");
         setTitle("");
@@ -142,7 +141,6 @@ export function CreateFormPage() {
                             onChange={(e) => updateQuestion(q.id, { title: e.target.value })}
                         />
 
-                        {/* Preview/Editor by type */}
                         {(q.type === QuestionType.TEXT) && (
                             <div className={styles.preview}>
                                 <input className={styles.input} placeholder="User will type text here" disabled />
@@ -176,9 +174,7 @@ export function CreateFormPage() {
                                 <button
                                     className={styles.smallButton}
                                     type="button"
-                                    onClick={() =>
-                                        updateQuestion(q.id, { options: [...(q.options ?? []), ""] })
-                                    }
+                                    onClick={() => updateQuestion(q.id, { options: [...(q.options ?? []), ""] })}
                                 >
                                     + option
                                 </button>
@@ -206,9 +202,7 @@ export function CreateFormPage() {
                                 <button
                                     className={styles.smallButton}
                                     type="button"
-                                    onClick={() =>
-                                        updateQuestion(q.id, { options: [...(q.options ?? []), ""] })
-                                    }
+                                    onClick={() => updateQuestion(q.id, { options: [...(q.options ?? []), ""] })}
                                 >
                                     + option
                                 </button>

@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
-import { useGetFormsQuery } from "../../features/forms/formsApi";
+import { useGetFormsQuery } from "../../shared/graphql/generated";
+import type { GetFormsQuery } from "../../shared/graphql/generated";
 import styles from "./HomePage.module.css";
 
 export function HomePage() {
-    const { data: forms, isLoading, isError, refetch } = useGetFormsQuery();
+    const { data, isLoading, isError, refetch } = useGetFormsQuery();
+
+    const forms: GetFormsQuery["forms"] = data?.forms ?? [];
 
     return (
         <div className={styles.page}>
@@ -24,14 +27,14 @@ export function HomePage() {
             {isLoading && <div className={styles.info}>Loading...</div>}
             {isError && <div className={styles.error}>Failed to load forms</div>}
 
-            {!isLoading && !isError && (forms?.length ?? 0) === 0 && (
+            {!isLoading && !isError && forms.length === 0 && (
                 <div className={styles.info}>
                     No forms yet. Click <b>Create New Form</b>.
                 </div>
             )}
 
             <div className={styles.list}>
-                {forms?.map((f) => (
+                {forms.map((f) => (
                     <div key={f.id} className={styles.card}>
                         <div className={styles.cardTitle}>{f.title}</div>
 
