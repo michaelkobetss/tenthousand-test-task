@@ -1,10 +1,12 @@
 import { api } from "../api/api";
+import type { CreateFormInput } from "../../../../shared/types/form";
 
 /* ================= TYPES ================= */
 
 export interface Form {
     id: string;
     title: string;
+    description?: string;
 }
 
 interface GetFormsResponse {
@@ -19,16 +21,10 @@ interface CreateFormResponse {
     };
 }
 
-export interface CreateFormArgs {
-    title: string;
-    description?: string;
-}
-
 /* ================= API ================= */
 
 export const formsApi = api.injectEndpoints({
     endpoints: (builder) => ({
-
         /* -------- GET FORMS -------- */
 
         getForms: builder.query<Form[], void>({
@@ -47,33 +43,26 @@ export const formsApi = api.injectEndpoints({
                     `,
                 },
             }),
-            transformResponse: (response: GetFormsResponse) =>
-                response.data.forms,
+            transformResponse: (response: GetFormsResponse) => response.data.forms,
         }),
 
         /* -------- CREATE FORM -------- */
 
-        createForm: builder.mutation<Form, CreateFormArgs>({
-            query: ({ title, description }) => ({
+        createForm: builder.mutation<Form, CreateFormInput>({
+            query: (input) => ({
                 url: "",
                 method: "POST",
                 body: {
                     query: `
-                mutation CreateForm($input: CreateFormInput!) {
-                    createForm(input: $input) {
-                        id
-                        title
-                        description
-                    }
-                }
-            `,
-                    variables: {
-                        input: {
-                            title,
-                            description,
-                            questions: []
+                        mutation CreateForm($input: CreateFormInput!) {
+                            createForm(input: $input) {
+                                id
+                                title
+                                description
+                            }
                         }
-                    },
+                    `,
+                    variables: { input },
                 },
             }),
             transformResponse: (response: CreateFormResponse) =>
@@ -103,7 +92,4 @@ export const formsApi = api.injectEndpoints({
 
 /* ================= HOOKS ================= */
 
-export const {
-    useGetFormsQuery,
-    useCreateFormMutation,
-} = formsApi;
+export const { useGetFormsQuery, useCreateFormMutation } = formsApi;

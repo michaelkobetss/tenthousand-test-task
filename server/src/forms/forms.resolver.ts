@@ -27,7 +27,10 @@ export class FormsResolver {
                 id: randomUUID(),
                 title: q.title,
                 type: q.type,
-                options: q.options,
+                options:
+                    q.type === "TEXT" || q.type === "DATE"
+                        ? undefined
+                        : q.options ?? [],
             })),
         };
 

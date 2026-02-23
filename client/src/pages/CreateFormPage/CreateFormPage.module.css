@@ -6,9 +6,85 @@
     gap: 16px;
 }
 
-.input, .textarea {
+.input,
+.textarea {
     padding: 10px;
     font-size: 16px;
+}
+
+.textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.questions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.questionCard {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #fff;
+}
+
+.questionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.questionIndex {
+    font-weight: 600;
+}
+
+.preview {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.optionRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.optionInput {
+    flex: 1;
+    padding: 8px 10px;
+    font-size: 14px;
+}
+
+.smallButton {
+    padding: 8px 10px;
+    font-size: 14px;
+    background: #f4f4f5;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.dangerButton {
+    padding: 8px 10px;
+    font-size: 14px;
+    background: #fff;
+    border: 1px solid rgba(220, 38, 38, 0.5);
+    color: #dc2626;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .submit {
@@ -19,4 +95,10 @@
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 10px;
+}
+
+.submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }

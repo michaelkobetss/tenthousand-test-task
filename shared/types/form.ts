@@ -16,3 +16,13 @@ export interface QuestionDraft {
     type: QuestionType;
     options?: string[];
 }
+
+export interface CreateFormInput {
+    title: string;
+    description?: string;
+    questions: {
+        title: string;
+        type: QuestionType;
+        options?: string[];
+    }[];
+}
